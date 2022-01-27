@@ -1,0 +1,31 @@
+html{
+    box-sizing: border-box;
+}
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+body{
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+#container{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 960px;
+    height: 500px;
+    border: 1px solid black;
+}
+.square{
+    height: 31.125px;
+    width: 59.875px;
+    /* // box-sizing: border-box; */
+}
