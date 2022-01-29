@@ -9,10 +9,10 @@ function createGrid(size){
         for (let j = 0; j < size; j++){
             const square = document.createElement('div');
             square.className = 'square';
-            // let width = 958 / parseInt(size);
-            // square.style.width = `${width}px`;
-            // let height = 498 / parseInt(size);
-            // square.style.height = `${height}px`;
+            let width = 958 / parseInt(size);
+            square.style.width = `${width}px`;
+            let height = 498 / parseInt(size);
+            square.style.height = `${height}px`;
             row.appendChild(square);
         }
     }
@@ -27,9 +27,8 @@ function chooseGridSize(){
     let chosenGridSize = +prompt('Enter grid size (1-100): ');
     chosenGridSize = Math.abs(chosenGridSize);
     if (100 >= Math.abs(chosenGridSize) >= 1){
-        clearGrid();
         gridSize = chosenGridSize;
-        createGrid(gridSize);
+        clearGrid();
     }
     else{
         chooseGridSize();
@@ -43,10 +42,11 @@ createGrid(gridSize);
 let clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', clearGrid);
 
-function clearGrid(e){
-    Array.from(squares).forEach(function(e){
-        e.style.cssText = `background-color: white`;
-    });
+function clearGrid(){
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    createGrid(gridSize);
 }
 
 // hover making randomized colors
@@ -57,6 +57,6 @@ Array.from(squares).forEach(function(e){
         randNum = Math.random() * 255;
         randNum2 = Math.random() * 255;
         randNum3 = Math.random() * 255;
-        e.style.cssText = `background-color: rgb(${randNum}, ${randNum2}, ${randNum3})`;
+        e.style.backgroundColor = `rgb(${randNum}, ${randNum2}, ${randNum3})`;
     });
 });
