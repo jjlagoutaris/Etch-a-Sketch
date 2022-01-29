@@ -1,15 +1,62 @@
+let gridSize = 16;
+
 let container = document.querySelector("#container");
-function createGrid(){
-    for(let i = 0; i < 16; i++){
+function createGrid(size){
+    for(let i = 0; i < size; i++){
         const row = document.createElement('div');
         row.classList.add('row');
         container.appendChild(row);
-        for (let j = 0; j < 16; j++){
+        for (let j = 0; j < size; j++){
             const square = document.createElement('div');
-            square.setAttribute('id', 'innerSquare');
-            square.classList.add('square');
+            square.className = 'square';
+            // let width = 958 / parseInt(size);
+            // square.style.width = `${width}px`;
+            // let height = 498 / parseInt(size);
+            // square.style.height = `${height}px`;
             row.appendChild(square);
         }
     }
 }
-createGrid();
+
+// choose grid size button
+
+let gridSizeBtn = document.querySelector('.size');
+gridSizeBtn.addEventListener('click', chooseGridSize);
+
+function chooseGridSize(){
+    let chosenGridSize = +prompt('Enter grid size (1-100): ');
+    chosenGridSize = Math.abs(chosenGridSize);
+    if (100 >= Math.abs(chosenGridSize) >= 1){
+        clearGrid();
+        gridSize = chosenGridSize;
+        createGrid(gridSize);
+    }
+    else{
+        chooseGridSize();
+    }
+}
+
+createGrid(gridSize);
+
+// clear screen button
+
+let clearBtn = document.querySelector('.clear');
+clearBtn.addEventListener('click', clearGrid);
+
+function clearGrid(e){
+    Array.from(squares).forEach(function(e){
+        e.style.cssText = `background-color: white`;
+    });
+}
+
+// hover making randomized colors
+
+let squares = document.querySelectorAll('.square');
+Array.from(squares).forEach(function(e){
+    e.addEventListener('mouseover', () => {
+        randNum = Math.random() * 255;
+        randNum2 = Math.random() * 255;
+        randNum3 = Math.random() * 255;
+        e.style.cssText = `background-color: rgb(${randNum}, ${randNum2}, ${randNum3})`;
+    });
+});
